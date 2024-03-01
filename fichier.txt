@@ -1,0 +1,39 @@
+
+Step :		< infile cmd1 | cmd2 > outfile	--->	infile "cmd1" "cmd2" outfile
+
+1.	Initialisation des var et verification des arg.
+
+2.	Ouvrez le fichier source (infile) en lecture.
+
+3.	Creation du canal du communication entre cmd1 et cmd2 : Utilisez pipe() pour cree un canal unidirectionnel de données.
+
+4.	Création du processus enfant : Utilisez la fonction fork() pour créer un nouveau processus.
+
+5.	Rediriger l'entrée standard (stdin) du processus exécutant cmd1 pour qu'il lise à partir du descripteur de fichier fd_infile.
+	Dans le processus parent, configurez la sortie standard (stdout) pour écrire dans le descripteur de fichier de sortie (outfile).
+	Exécutez la première commande (cmd1) dans le processus parent en redirigeant son entrée standard (stdin) à partir du descripteur de fichier du pipe.
+	Dans le processus enfant, configurez l'entrée standard (stdin) pour lire à partir du descripteur de fichier du pipe.
+	Exécutez la deuxième commande (cmd2) dans le processus enfant.
+	Attendez que les deux processus se terminent.
+	Fermez tous les descripteurs de fichiers non nécessaires.
+	Libérez toutes les ressources utilisées.
+
+
+Explication approfondi de chaques step : 
+
+3. pipe() crée un tube, un canal unidirectionnel de données qui peut être utilisé pour la communication entre processus (cmd1 et cmd2).
+	Le tableau pipefd est utilisé pour renvoyé deux descripteurs de fichier faisant référence aux extrémités du tube. 
+	pipefd[0] fait référence à l'extrémité de lecture du tube. 
+	pipefd[1] fait référence à l'extrémité d'écriture du tube. 
+	Les données écrites sur l'extrémité d'écriture du tube sont mises en mémoire tampon par le noyau jusqu'à ce qu'elles soient lues sur l'extrémité de lecture du tube.
+
+4. fork(), crée un nouveau processus (enfant), et dans le processus parent, la valeur retournée par fork() est l'ID du processus enfant créé. 
+	Dans le processus enfant, la valeur retournée est 0. En cas d'échec, la valeur retournée est -1.
+	La variable pid est une variable de type pid_t utilisée pour stocker l'ID d'un processus.
+
+
+5. lorsque vous redirigez l'entrée standard (stdin) vers le descripteur de fichier fd_infile à l'aide de dup2(fd_infile, STDIN_FILENO), 
+	vous remplacez le flux d'entrée standard de votre processus par le flux de données provenant du fichier source. Cela signifie que toute opération de lecture standard, 
+	telle que scanf() ou fgets(), lira à partir du fichier source au lieu du clavier.
+	Un descripteur de fichier est un identifiant numérique associé à une ressource de communication ouverte.
+	Un input est une donnée que le programme reçoit pour traitement, qui peut être liée aux descripteurs de fichier ou provenir d'autres sources.
