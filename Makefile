@@ -4,7 +4,7 @@ CC 			= cc
 
 CFLAGS		= -g3 -Wall -Wextra -Werror
 
-SRC			= main.c child_cmd1.c child_cmd2.c utils.c
+SRC			= main.c access_cmd1.c access_cmd2.c child_cmd1.c child_cmd2.c utils.c
 
 OBJ 		= $(SRC:.c=.o)
 
