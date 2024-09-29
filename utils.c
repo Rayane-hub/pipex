@@ -106,3 +106,115 @@ void	ft_free_split_flag(t_var *var)
 	}
 	free(var->split_flag);
 }
+
+/*
+
+#include "Account.hpp"
+#include <iostream>
+#include <ctime>
+
+// Initialisation des variables statiques
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+
+// Constructeur
+Account::Account(int initial_deposit) : 
+    _accountIndex(_nbAccounts), 
+    _amount(initial_deposit), 
+    _nbDeposits(0), 
+    _nbWithdrawals(0) 
+{
+    _nbAccounts++;
+    _totalAmount += initial_deposit;
+    _displayTimestamp();
+    std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
+}
+
+// Destructeur
+Account::~Account(void) {
+    _displayTimestamp();
+    std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";closed" << std::endl;
+    _nbAccounts--;
+    _totalAmount -= _amount;
+}
+
+// Méthodes statiques
+int Account::getNbAccounts(void) {
+    return _nbAccounts;
+}
+
+int Account::getTotalAmount(void) {
+    return _totalAmount;
+}
+
+int Account::getNbDeposits(void) {
+    return _totalNbDeposits;
+}
+
+int Account::getNbWithdrawals(void) {
+    return _totalNbWithdrawals;
+}
+
+void Account::displayAccountsInfos(void) {
+    _displayTimestamp();
+    std::cout << "accounts:" << getNbAccounts() << ";total:" << getTotalAmount() 
+              << ";deposits:" << getNbDeposits() << ";withdrawals:" << getNbWithdrawals() 
+              << std::endl;
+}
+
+// Méthode de dépôt
+void Account::makeDeposit(int deposit) {
+    _displayTimestamp();
+    _amount += deposit;
+    _nbDeposits++;
+    _totalNbDeposits++;
+    _totalAmount += deposit;
+    std::cout << "index:" << _accountIndex << ";p_amount:" << _amount - deposit
+              << ";deposit:" << deposit << ";amount:" << _amount << ";nb_deposits:" << _nbDeposits << std::endl;
+}
+
+// Méthode de retrait
+bool Account::makeWithdrawal(int withdrawal) {
+    _displayTimestamp();
+    if (withdrawal > _amount) {
+        std::cout << "index:" << _accountIndex << ";p_amount:" << _amount 
+                  << ";withdrawal:refused" << std::endl;
+        return false;
+    }
+    _amount -= withdrawal;
+    _nbWithdrawals++;
+    _totalNbWithdrawals++;
+    _totalAmount -= withdrawal;
+    std::cout << "index:" << _accountIndex << ";p_amount:" << _amount + withdrawal 
+              << ";withdrawal:" << withdrawal << ";amount:" << _amount 
+              << ";nb_withdrawals:" << _nbWithdrawals << std::endl;
+    return true;
+}
+
+// Vérification du montant du compte
+int Account::checkAmount(void) const {
+    return _amount;
+}
+
+// Affichage du statut du compte
+void Account::displayStatus(void) const {
+    _displayTimestamp();
+    std::cout << "index:" << _accountIndex << ";amount:" << _amount 
+              << ";deposits:" << _nbDeposits << ";withdrawals:" << _nbWithdrawals << std::endl;
+}
+
+// Méthode d'affichage de l'horodatage
+void Account::_displayTimestamp(void) {
+    std::time_t now = std::time(0);
+    std::tm *ltm = std::localtime(&now);
+    std::cout << "[" << 1900 + ltm->tm_year 
+              << (ltm->tm_mon < 9 ? "0" : "") << 1 + ltm->tm_mon 
+              << (ltm->tm_mday < 10 ? "0" : "") << ltm->tm_mday 
+              << "_" << (ltm->tm_hour < 10 ? "0" : "") << ltm->tm_hour 
+              << (ltm->tm_min < 10 ? "0" : "") << ltm->tm_min 
+              << (ltm->tm_sec < 10 ? "0" : "") << ltm->tm_sec << "] ";
+}
+
+*/
